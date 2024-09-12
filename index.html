@@ -34,6 +34,7 @@
     <label for="inputRepo">Enter GitHub Username/Repository:</label>
     <input type="text" id="inputRepo" placeholder="e.g., octocat/Hello-World">
     <button onclick="replaceRepo()">Generate Links</button>
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
 
     <div id="output"></div>
 
@@ -50,6 +51,26 @@
 
             // Display the result in the output div
             document.getElementById("output").textContent = result;
+        }
+
+        function copyToClipboard() {
+            // Get the output content
+            var outputText = document.getElementById("output").textContent;
+
+            // Create a temporary textarea to copy the text
+            var tempTextArea = document.createElement("textarea");
+            tempTextArea.value = outputText;
+            document.body.appendChild(tempTextArea);
+
+            // Select and copy the text
+            tempTextArea.select();
+            document.execCommand("copy");
+
+            // Remove the temporary textarea
+            document.body.removeChild(tempTextArea);
+
+            // Alert to confirm the text has been copied
+            alert("Copied to clipboard!");
         }
     </script>
 
