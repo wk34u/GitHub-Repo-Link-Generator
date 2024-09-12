@@ -21,19 +21,14 @@
             padding: 8px;
             margin-right: 10px;
         }
-        button {
+        button, #copyMessage {
             padding: 8px 12px;
             cursor: pointer;
         }
         #copyMessage {
-            visibility: hidden;
+            display: none;
             background-color: #4CAF50;
             color: white;
-            padding: 10px;
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
             border-radius: 5px;
         }
     </style>
@@ -44,50 +39,40 @@
 
     <label for="inputRepo">Enter GitHub Username/Repository:</label>
     <input type="text" id="inputRepo" placeholder="e.g., octocat/Hello-World">
-    <button onclick="replaceRepo()">Generate Links</button>
-    <button onclick="copyToClipboard()">Copy to Clipboard</button>
-
+    <button id="copyBtn" onclick="replaceRepo()">Generate Links</button>
+    <button id="copyToClipboardBtn" onclick="copyToClipboard()">Copy to Clipboard</button>
+	<div id="copyMessage">Copied!</div>
     <div id="output"></div>
-    <div id="copyMessage">Copied to clipboard!</div>
+    
 
     <script>
         function replaceRepo() {
-            // Get the input value
             var userRepo = document.getElementById("inputRepo").value;
-
-            // Original template string with {USER_REPO}
             var template = `https://github.com/{USER_REPO} | ![last-commit](https://img.shields.io/github/last-commit/{USER_REPO}?style=flat-square) | ![stars](https://img.shields.io/github/stars/{USER_REPO}?style=flat-square) | ![release](https://img.shields.io/github/v/release/{USER_REPO}?style=flat-square)`;
-
-            // Replace {USER_REPO} with the input value
             var result = template.replace(/{USER_REPO}/g, userRepo);
-
-            // Display the result in the output div
             document.getElementById("output").textContent = result;
         }
 
         function copyToClipboard() {
-            // Get the output content
             var outputText = document.getElementById("output").textContent;
 
-            // Create a temporary textarea to copy the text
             var tempTextArea = document.createElement("textarea");
             tempTextArea.value = outputText;
             document.body.appendChild(tempTextArea);
-
-            // Select and copy the text
             tempTextArea.select();
             document.execCommand("copy");
-
-            // Remove the temporary textarea
             document.body.removeChild(tempTextArea);
 
-            // Show floating message
+            // Hide the copy button, show the message
+            var copyBtn = document.getElementById("copyToClipboardBtn");
             var copyMessage = document.getElementById("copyMessage");
-            copyMessage.style.visibility = "visible";
+            copyBtn.style.display = "none";
+            copyMessage.style.display = "inline-block";
 
-            // Hide after 2 seconds
+            // After 2 seconds, show the button again
             setTimeout(function() {
-                copyMessage.style.visibility = "hidden";
+                copyMessage.style.display = "none";
+                copyBtn.style.display = "inline-block";
             }, 2000);
         }
     </script>
