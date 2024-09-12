@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repo Link Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>GitHub Repo Link Generator</h2>
+
+    <label for="inputRepo">Enter GitHub Username/Repository:</label>
+    <input type="text" id="inputRepo" placeholder="e.g., octocat/Hello-World">
+    <button onclick="replaceRepo()">Generate Links</button>
+
+    <div id="output"></div>
+
+    <script>
+        function replaceRepo() {
+            // Get the input value
+            var userRepo = document.getElementById("inputRepo").value;
+
+            // Original template string with {USER_REPO}
+            var template = `https://github.com/{USER_REPO} | ![last-commit](https://img.shields.io/github/last-commit/{USER_REPO}?style=flat-square) | ![stars](https://img.shields.io/github/stars/{USER_REPO}?style=flat-square) | ![release](https://img.shields.io/github/v/release/{USER_REPO}?style=flat-square)`;
+
+            // Replace {USER_REPO} with the input value
+            var result = template.replace(/{USER_REPO}/g, userRepo);
+
+            // Display the result in the output div
+            document.getElementById("output").textContent = result;
+        }
+    </script>
+
+</body>
+</html>
