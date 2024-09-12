@@ -25,6 +25,17 @@
             padding: 8px 12px;
             cursor: pointer;
         }
+        #copyMessage {
+            visibility: hidden;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -37,6 +48,7 @@
     <button onclick="copyToClipboard()">Copy to Clipboard</button>
 
     <div id="output"></div>
+    <div id="copyMessage">Copied to clipboard!</div>
 
     <script>
         function replaceRepo() {
@@ -69,8 +81,14 @@
             // Remove the temporary textarea
             document.body.removeChild(tempTextArea);
 
-            // Alert to confirm the text has been copied
-            alert("Copied to clipboard!");
+            // Show floating message
+            var copyMessage = document.getElementById("copyMessage");
+            copyMessage.style.visibility = "visible";
+
+            // Hide after 2 seconds
+            setTimeout(function() {
+                copyMessage.style.visibility = "hidden";
+            }, 2000);
         }
     </script>
 
