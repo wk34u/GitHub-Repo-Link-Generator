@@ -48,7 +48,7 @@
     <script>
         function replaceRepo() {
             var userRepo = document.getElementById("inputRepo").value;
-            var template = `https://github.com/{USER_REPO} | ![last-commit](https://img.shields.io/github/last-commit/{USER_REPO}?style=flat-square) | ![stars](https://img.shields.io/github/stars/{USER_REPO}?style=flat-square) | ![release](https://img.shields.io/github/v/release/{USER_REPO}?style=flat-square)`;
+            var template = `https://github.com/{USER_REPO} | ![last-commit](https://img.shields.io/github/last-commit/{USER_REPO}?style=flat-square) | ![stars](https://img.shields.io/github/stars/{USER_REPO}?style=flat-square) | ![release](https://img.shields.io/github/v/release/{USER_REPO}?style=flat-square) | `;
             var result = template.replace(/{USER_REPO}/g, userRepo);
             document.getElementById("output").textContent = result;
         }
