@@ -39,6 +39,7 @@
 
     <label for="inputRepo">Enter GitHub Username/Repository:</label>
     <input type="text" id="inputRepo" placeholder="e.g., octocat/Hello-World">
+    <input type="text" id="inputDesc" placeholder="e.g., Hello-World">
     <button id="copyBtn" onclick="replaceRepo()">Generate Links</button>
     <button id="copyToClipboardBtn" onclick="copyToClipboard()">Copy to Clipboard</button>
 	<div id="copyMessage">Copied!</div>
@@ -48,8 +49,10 @@
     <script>
         function replaceRepo() {
             var userRepo = document.getElementById("inputRepo").value;
-            var template = `https://github.com/{USER_REPO} | ![last-commit](https://img.shields.io/github/last-commit/{USER_REPO}?style=flat-square) | ![stars](https://img.shields.io/github/stars/{USER_REPO}?style=flat-square) | ![release](https://img.shields.io/github/v/release/{USER_REPO}?style=flat-square) | `;
+	    var desc = document.getElementById("inputDesc").value;
+            var template = `[{DESC}](https://github.com/{USER_REPO}) | ![last-commit](https://img.shields.io/github/last-commit/{USER_REPO}?style=flat-square) | ![stars](https://img.shields.io/github/stars/{USER_REPO}?style=flat-square) | ![release](https://img.shields.io/github/v/release/{USER_REPO}?style=flat-square) | {DESC}`;
             var result = template.replace(/{USER_REPO}/g, userRepo);
+	    result = result.replace(/{DESC}/g, desc);
             document.getElementById("output").textContent = result;
         }
 
