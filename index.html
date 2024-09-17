@@ -21,15 +21,35 @@
             padding: 8px;
             margin-right: 10px;
         }
-        button, #copyMessage {
+        button {
             padding: 8px 12px;
             cursor: pointer;
+            width: 200px;
+            height: 40px;
+            font-size: 16px;
+            line-height: 24px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            margin: 0;
+            vertical-align: middle;
         }
         #copyMessage {
             display: none;
             background-color: #4CAF50;
             color: white;
             border-radius: 5px;
+            padding: 8px 12px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 24px;
+            width: 200px;
+            height: 40px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -42,17 +62,16 @@
     <input type="text" id="inputDesc" placeholder="e.g., Hello-World">
     <button id="copyBtn" onclick="replaceRepo()">Generate Links</button>
     <button id="copyToClipboardBtn" onclick="copyToClipboard()">Copy to Clipboard</button>
-	<div id="copyMessage">Copied!</div>
+    <div id="copyMessage">Copied!</div>
     <div id="output"></div>
-    
 
     <script>
         function replaceRepo() {
             var userRepo = document.getElementById("inputRepo").value;
-	    var desc = document.getElementById("inputDesc").value;
+            var desc = document.getElementById("inputDesc").value;
             var template = `[{DESC}](https://github.com/{USER_REPO}) | ![last-commit](https://img.shields.io/github/last-commit/{USER_REPO}?style=flat-square) | ![stars](https://img.shields.io/github/stars/{USER_REPO}?style=flat-square) | ![release](https://img.shields.io/github/v/release/{USER_REPO}?style=flat-square) | {DESC}`;
             var result = template.replace(/{USER_REPO}/g, userRepo);
-	    result = result.replace(/{DESC}/g, desc);
+            result = result.replace(/{DESC}/g, desc);
             document.getElementById("output").textContent = result;
         }
 
@@ -72,7 +91,6 @@
             copyBtn.style.display = "none";
             copyMessage.style.display = "inline-block";
 
-            // After 2 seconds, show the button again
             setTimeout(function() {
                 copyMessage.style.display = "none";
                 copyBtn.style.display = "inline-block";
