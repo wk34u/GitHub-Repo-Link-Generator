@@ -78,14 +78,19 @@
     <div id="output"></div>
 
     <script>
-        function replaceRepo() {
-            var userRepo = document.getElementById("inputRepo").value;
-            var desc = document.getElementById("inputDesc").value;
-            var template = `[{DESC}](https://github.com/{USER_REPO}) | ![last-commit](https://img.shields.io/github/last-commit/{USER_REPO}?style=flat-square) | ![stars](https://img.shields.io/github/stars/{USER_REPO}?style=flat-square) | ![release](https://img.shields.io/github/v/release/{USER_REPO}?style=flat-square) | {DESC}`;
-            var result = template.replace(/{USER_REPO}/g, userRepo);
-            result = result.replace(/{DESC}/g, desc);
-            document.getElementById("output").textContent = result;
-        }
+	function replaceRepo() {
+	    var userRepo = document.getElementById("inputRepo").value;
+	    var desc = document.getElementById("inputDesc").value;
+	    var template = `[{NAME}](https://github.com/{USER_REPO}) | ![last-commit](https://img.shields.io/github/last-commit/{USER_REPO}?style=flat-square) | ![stars](https://img.shields.io/github/stars/{USER_REPO}?style=flat-square) | ![release](https://img.shields.io/github/v/release/{USER_REPO}?style=flat-square) | {DESC}`;
+
+	    var name = userRepo.includes('/') ? userRepo.split('/').pop() : userRepo;
+
+	    var result = template.replace(/{USER_REPO}/g, userRepo)
+	                         .replace(/{DESC}/g, desc)
+	                         .replace(/{NAME}/g, name);
+	    
+	    document.getElementById("output").textContent = result;
+	}
 
         function copyToClipboard() {
             var outputText = document.getElementById("output").textContent;
